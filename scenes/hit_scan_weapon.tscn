@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c04ty0k8grmt5"]
+
+[ext_resource type="Script" path="res://scripts/hit_scan_weapon.gd" id="1_oo8v0"]
+[ext_resource type="PackedScene" uid="uid://dvwhrlvp2bbud" path="res://scenes/sparks.tscn" id="2_6na1c"]
+
+[node name="HitScanWeapon" type="Node3D"]
+script = ExtResource("1_oo8v0")
+sparks = ExtResource("2_6na1c")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -100)

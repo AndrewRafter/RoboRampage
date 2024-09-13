@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dcvrrtyhh1y6q"]
+
+[ext_resource type="PackedScene" uid="uid://c04ty0k8grmt5" path="res://scenes/hit_scan_weapon.tscn" id="1_vouba"]
+[ext_resource type="PackedScene" uid="uid://bh8n84e7r181e" path="res://assets/Rifle.glb" id="2_brexs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rx5d"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="Curve" id="Curve_w65tu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uk617"]
+curve = SubResource("Curve_w65tu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tql1l"]
+direction = Vector3(0, 0, -1)
+spread = 8.0
+initial_velocity_min = 6.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_uk617")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7bmpf"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Rifle" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_vouba")]
+fire_rate = 8.0
+recoil = 0.3
+weapon_mesh = NodePath("Rifle")
+weapon_damage = 70
+muzzle_flash = NodePath("MuzzleFlash")
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.3, -3.2)
+layers = 2
+material_override = SubResource("StandardMaterial3D_6rx5d")
+cast_shadow = 0
+emitting = false
+lifetime = 0.07
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_tql1l")
+draw_pass_1 = SubResource("BoxMesh_7bmpf")
+
+[node name="Rifle" parent="." index="3" instance=ExtResource("2_brexs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1.8)
+
+[node name="Part_104" parent="Rifle" index="0"]
+layers = 2
+
+[node name="Gun butt_018" parent="Rifle" index="1"]
+layers = 2
+
+[node name="Part_106" parent="Rifle" index="2"]
+layers = 2
+
+[node name="Grip_027" parent="Rifle" index="3"]
+layers = 2
+
+[node name="Part_108" parent="Rifle" index="4"]
+layers = 2
+
+[node name="Scope_022" parent="Rifle" index="5"]
+layers = 2
+
+[node name="Scope_023" parent="Rifle" index="6"]
+layers = 2
+
+[node name="Extra accessories_008" parent="Rifle" index="7"]
+layers = 2
+
+[node name="Part_112" parent="Rifle" index="8"]
+layers = 2
+
+[node name="Part_113" parent="Rifle" index="9"]
+layers = 2
+
+[node name="Muzzle breaks" parent="Rifle" index="10"]
+layers = 2
+
+[editable path="Rifle"]

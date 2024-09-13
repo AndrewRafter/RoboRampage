@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctrneh1eo0vt8"]
+
+[ext_resource type="PackedScene" uid="uid://c04ty0k8grmt5" path="res://scenes/hit_scan_weapon.tscn" id="1_3cha1"]
+[ext_resource type="PackedScene" uid="uid://b3hit11dp4us4" path="res://assets/SMG.glb" id="2_k06ok"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rx5d"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="Curve" id="Curve_w65tu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uk617"]
+curve = SubResource("Curve_w65tu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tql1l"]
+direction = Vector3(0, 0, -1)
+spread = 8.0
+initial_velocity_min = 6.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_uk617")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7bmpf"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="SMG" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_3cha1")]
+weapon_mesh = NodePath("SMG")
+muzzle_flash = NodePath("MuzzleFlash")
+automatic = true
+
+[node name="SMG" parent="." index="1" instance=ExtResource("2_k06ok")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1.8)
+
+[node name="Suppressors_003" parent="SMG" index="0"]
+layers = 2
+
+[node name="Part_024" parent="SMG" index="1"]
+layers = 2
+
+[node name="Rail_009" parent="SMG" index="2"]
+layers = 2
+
+[node name="Grip_017" parent="SMG" index="3"]
+layers = 2
+
+[node name="Charger_011" parent="SMG" index="4"]
+layers = 2
+
+[node name="Scope_016" parent="SMG" index="5"]
+layers = 2
+
+[node name="Part_029" parent="SMG" index="6"]
+layers = 2
+
+[node name="Part_030" parent="SMG" index="7"]
+layers = 2
+
+[node name="Gun butt_012" parent="SMG" index="8"]
+layers = 2
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.3, -2.9)
+layers = 2
+material_override = SubResource("StandardMaterial3D_6rx5d")
+cast_shadow = 0
+emitting = false
+lifetime = 0.07
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_tql1l")
+draw_pass_1 = SubResource("BoxMesh_7bmpf")
+
+[editable path="SMG"]
